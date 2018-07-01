@@ -1,0 +1,29 @@
+{
+  "name": "a9cdn-uploader",
+  "version": "1.0.0",
+  "description": "upload CDN to ...",
+  "homepage": "https://github.com/moilioncircle/a9cdn-uploader.git",
+  "license": "MIT",
+  "keywords": [
+    "CDN",
+    "replace",
+    "cli"
+  ],
+  "author": {
+    "name": "trydofor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moilioncircle/a9cdn-uploader.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "a9cdn-uploader": "./bin/cli.js"
+  },
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
