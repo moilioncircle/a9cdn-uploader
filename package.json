@@ -6,7 +6,7 @@
   "license": "MIT",
   "keywords": [
     "CDN",
-    "replace",
+    "upload",
     "cli"
   ],
   "author": {
@@ -24,6 +24,7 @@
     "a9cdn-uploader": "./bin/cli.js"
   },
   "dependencies": {
-    "commander": "^2.15.1"
+    "commander": "^2.15.1",
+    "qiniu": "^7.2.1"
   }
 }
