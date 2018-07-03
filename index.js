@@ -1,5 +1,3 @@
-const libScan = require('./lib/scan.js')
-
 /**
  * check cdn files with local in `dir` to cdn. the uri base on `dir`
  * @param {*} cnf a js-json format, see the `conf()` output.
@@ -8,6 +6,7 @@ const libScan = require('./lib/scan.js')
  */
 function check(cnf, dir, vb) {
     const conf = parse(cnf)
+    const libScan = require('./lib/scan.js')
     const item = libScan.list(dir)
     const host = conf.domain
     const root = item.root
@@ -48,19 +47,7 @@ function upload(cnf, dir, vb) {
     const conf = parse(cnf)
     const cdnx = require('./lib/' + conf.cdnxlib + '.js')
     cdnx.config(conf.coinfig)
-    const item = libScan.list(dir)
-    const root = item.root
-    const func = function (err, uri) {
-        if (err) {
-            console.log('a9cdn-upload-ng:' + uri + ':' + err)
-        } else {
-            if (vb) console.log('a9cdn-upload-ok:' + uri)
-        }
-    }
-
-    for (const e of item.list) {
-        cdnx.upload(root + '/' + e, e, func)
-    }
+    cdnx.upload(dir, vb)
 }
 
 /**

@@ -4,7 +4,7 @@ qn.config({ // the cdn name, qiniu cdn config
     accessKey: '',
     secretKey: '',
     bucket: '',
-    domain: '', // public domain for check
 })
 
-qn.upload('./index.js','/test/index.js', console.log)
+qn.upload('./index.js', true)
+qn.upload('test', true)
