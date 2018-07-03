@@ -4,8 +4,9 @@ const libScan = require('./lib/scan.js')
  * check cdn files with local in `dir` to cdn. the uri base on `dir`
  * @param {*} cnf a js-json format, see the `conf()` output.
  * @param {string} dir a path as root.
+ * @param {boolean} vb output all message, `false` for only bad.
  */
-function check(cnf, dir) {
+function check(cnf, dir, vb) {
     const conf = parse(cnf)
     const item = libScan.list(dir)
     const host = conf.domain
@@ -28,9 +29,9 @@ function check(cnf, dir) {
                 s2.update(b)
                 const h2 = s2.digest('hex')
                 if (h1 === h2) {
-                    console.log('a9cdn-check-ok:' + e)
+                    if (vb) console.log('a9cdn-check-ok:' + e)
                 } else {
-                    console.log('a9cdn-check-ng:' + h1 + ':' + h2)
+                    console.log('a9cdn-check-ng:' + e + ':' + h1 + ':' + h2)
                 }
             })
         })
@@ -41,8 +42,9 @@ function check(cnf, dir) {
  * upload local files in `dir` to cdn. the uri base on `dir`
  * @param {*} cnf a js-json format, see the `conf()` output.
  * @param {string} dir a path as root.
+ * @param {boolean} vb output all message, `false` for only bad.
 */
-function upload(cnf, dir) {
+function upload(cnf, dir, vb) {
     const conf = parse(cnf)
     const cdnx = require('./lib/' + conf.cdnxlib + '.js')
     cdnx.config(conf.coinfig)
@@ -52,9 +54,10 @@ function upload(cnf, dir) {
         if (err) {
             console.log('a9cdn-upload-ng:' + uri + ':' + err)
         } else {
-            console.log('a9cdn-upload-ok:' + uri)
+            if (vb) console.log('a9cdn-upload-ok:' + uri)
         }
     }
+
     for (const e of item.list) {
         cdnx.upload(root + '/' + e, e, func)
     }
